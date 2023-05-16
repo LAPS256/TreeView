@@ -1,21 +1,21 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
-// import { data } from "./data.json";
+import { data as jsonData } from "./data.json";
 
 const API = "http://49.249.110.2:8050/api/MenuMasters/GetMenuMasterList/173";
 
 export default function App() {
   const [gridView, setGridView] = useState(true);
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(jsonData);
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(API, { method: "GET" });
-      const json = await response.json();
-      if (json.status) setData(json.data);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await fetch(API, { method: "GET" });
+  //     const json = await response.json();
+  //     if (json.status) setData(json.data);
+  //   })();
+  // }, []);
 
   const filters = useMemo(() => data.filter((el) => !el.refMenuId), [data]);
   const mixedChildren = useMemo(
